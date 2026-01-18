@@ -35,3 +35,12 @@ The system integrates short-form video content with a verified transactional lay
 1. **Clone the Repository**
    ```bash
    git clone [https://github.com/tejas1598/crave-feed-backend.git](https://github.com/tejas1598/crave-feed-backend.git)
+
+2. **Database Configuration**
+   * Ensure PostgreSQL is running.
+   * Create a database named `crave_feed_db`.
+   * Configure `src/main/resources/application.properties` with local credentials.
+     
+3. **Build and Run**
+   ```bash
+   mvn spring-boot:run

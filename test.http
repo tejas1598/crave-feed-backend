@@ -1,0 +1,23 @@
+### Create First Restaurant
+POST http://localhost:8080/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Burger King - Pune",
+  "address": "FC Road, Pune",
+  "ownerId": 101,
+  "latitude": 18.5204,
+  "longitude": 73.8567
+}
+
+### Create Second Restaurant
+POST http://localhost:8080/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Pizza Hut - Mumbai",
+  "address": "Bandra West, Mumbai",
+  "ownerId": 102,
+  "latitude": 19.0596,
+  "longitude": 72.8295
+}

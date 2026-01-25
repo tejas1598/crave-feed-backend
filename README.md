@@ -1,4 +1,4 @@
-# Crave-Feed Backend
+# 🍔 Crave-Feed Backend
 
 **Project Description**
 Crave-Feed is a video-first food commerce platform designed to bridge the gap between content discovery and transaction. It addresses the friction in current food delivery models where users view content on social media but lack a direct path to purchase.
@@ -6,31 +6,56 @@ Crave-Feed is a video-first food commerce platform designed to bridge the gap be
 **Core Value Proposition**
 The system integrates short-form video content with a verified transactional layer, allowing users to move from "Watching" to "Ordering" in a single interface without context switching.
 
-## Key Architectural Pillars
+---
 
-### 1. Verified Linking System
-* **Mechanism:** Implements a strict foreign-key relationship between media assets (`Reels`) and inventory items (`MenuItem`).
+## 🏗️ Key Architectural Pillars
+
+### 1. Verified Linking System (Implemented)
+* **Mechanism:** Implements a strict foreign-key relationship (`@OneToMany`) between media assets (`Reels`) and inventory items (`Restaurant`).
 * **Benefit:** Ensures data integrity, preventing broken links or price discrepancies between the video feed and the point of sale.
 
-### 2. Algorithmic Upselling
-* **Logic:** Utilizes a rules-based "Category Matcher" engine.
-* **Function:** Analyzes the primary item in the cart (e.g., Main Course) and programmatically suggests complementary high-margin items (e.g., Beverages/Sides) to maximize Average Order Value (AOV).
+### 2. Scalable REST Architecture (Implemented)
+* **Design:** Built using the **Controller-Service-Repository** pattern to ensure separation of concerns.
+* **Benefit:** Modular codebase that allows for easy expansion of features (like adding new delivery partners or payment gateways).
 
-### 3. Real-Time Logistics Engine
-* **Technology:** Implements WebSocket (STOMP protocol) connections for instant bi-directional communication.
-* **Application:** Powering a "Live Kitchen Dashboard" for restaurant partners, eliminating the need for manual page refreshes and reducing order acceptance latency.
+### 3. Future Roadmap (Planned Features)
+* **Real-Time Logistics Engine:** Plans to implement WebSocket (STOMP) for live kitchen dashboards.
+* **Algorithmic Upselling:** Developing a "Category Matcher" engine to suggest high-margin sides based on cart contents.
 
-### 4. Smart Subsidy Revenue Model
-* **Strategy:** A dynamic commission structure where platform fees charged to vendors are algorithmically reapplied to subsidize user delivery costs, improving conversion rates while maintaining unit economics.
+---
 
-## Technical Stack
-
-* **Backend Framework:** Java 17, Spring Boot 3.2
+## 🛠️ Technical Stack
+* **Backend Framework:** Java 17, Spring Boot 3
 * **Database:** PostgreSQL (Relational Data Persistence)
-* **API Protocol:** REST & WebSockets
+* **API Protocol:** RESTful Web Services
+* **ORM:** Hibernate (Spring Data JPA)
 * **Version Control:** Git
 
-## Setup Instructions
+---
+
+## 🔌 API Endpoints (Live)
+
+### 🏠 Restaurants
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/restaurants` | Register a new restaurant |
+| `GET` | `/api/restaurants` | Get all restaurants |
+
+### 🍔 Menu Items
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/menu/{restaurantId}` | Add food to a restaurant |
+| `GET` | `/api/menu/{restaurantId}` | Get menu for a restaurant |
+
+### 🎬 Video Reels
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/reels/{restaurantId}` | Upload a promotional video |
+| `GET` | `/api/reels` | Get the video feed |
+
+---
+
+## ⚙️ Setup Instructions
 
 1. **Clone the Repository**
    ```bash
@@ -39,8 +64,10 @@ The system integrates short-form video content with a verified transactional lay
 2. **Database Configuration**
    * Ensure PostgreSQL is running.
    * Create a database named `crave_feed_db`.
-   * Configure `src/main/resources/application.properties` with local credentials.
-     
+   * Open `src/main/resources/application.properties` and update the `username` and `password` with your local PostgreSQL credentials.
+
 3. **Build and Run**
+   * Open the project in your IDE (IntelliJ IDEA) or Terminal.
+   * Run the application using Maven:
    ```bash
    mvn spring-boot:run

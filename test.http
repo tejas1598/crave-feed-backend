@@ -21,3 +21,39 @@ Content-Type: application/json
   "latitude": 19.0596,
   "longitude": 72.8295
 }
+
+### Add Burger to Restaurant 1 (Burger King)
+POST http://localhost:8080/api/menu/1
+Content-Type: application/json
+
+{
+  "name": "Spicy Chicken Royale",
+  "description": "Crispy chicken with spicy sauce",
+  "price": 189.00,
+  "category": "MAIN",
+  "imageUrl": "https://fake-url.com/burger.jpg"
+}
+
+### Add Coke to Restaurant 1 (For Upselling)
+POST http://localhost:8080/api/menu/1
+Content-Type: application/json
+
+{
+  "name": "Coca Cola Medium",
+  "description": "Chilled fizzy drink",
+  "price": 60.00,
+  "category": "DRINK",
+  "imageUrl": "https://fake-url.com/coke.jpg"
+}
+
+### Add a Video Reel for Restaurant 1
+POST http://localhost:8080/api/reels/1
+Content-Type: application/json
+
+{
+  "videoUrl": "https://fake-url.com/burger-flip.mp4",
+  "description": "Watch us flip the juiciest burger in town! #foodporn"
+}
+
+### Get the Video Feed (TikTok Style)
+GET http://localhost:8080/api/reels

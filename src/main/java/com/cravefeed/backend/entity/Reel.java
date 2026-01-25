@@ -1,31 +1,47 @@
 package com.cravefeed.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Data
-@Table(name = "reels")
 public class Reel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String videoUrl; // URL to the video (AWS S3)
+    private String videoUrl; // URL to the video file
+    private String description; // e.g., "Check out our cheesy pizza!"
+    private int likes = 0; // Start with 0 likes
 
-    private String description; // The caption (e.g., "Best burger in Pune!")
-
-    private Integer likesCount = 0;
-
-    // RELATIONSHIP: A Reel belongs to a Restaurant
+    // RELATIONSHIP: Many Reels belong to One Restaurant
     @ManyToOne
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JoinColumn(name = "restaurant_id")
+    @JsonIgnore // Prevents infinite loops when converting to JSON
     private Restaurant restaurant;
 
-    // THE MAGIC LINK: This connects the Video to the Food
-    @ManyToOne
-    @JoinColumn(name = "menu_item_id", nullable = false)
-    private MenuItem menuItem;
+    // Constructors
+    public Reel() {}
+
+    public Reel(String videoUrl, String description, Restaurant restaurant) {
+        this.videoUrl = videoUrl;
+        this.description = description;
+        this.restaurant = restaurant;
+    }
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getLikes() { return likes; }
+    public void setLikes(int likes) { this.likes = likes; }
+
+    public Restaurant getRestaurant() { return restaurant; }
+    public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
 }
